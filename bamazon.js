@@ -1,5 +1,6 @@
 var mysql = require('mysql');
 var inquirer = require('inquirer');
+var table = require('console.table'); 
 
 var connection = mysql.createConnection({
 	host:'localhost',
@@ -14,23 +15,21 @@ connection.connect(function(err){
 })
 
 
-function itemsForSale () {
-    connection.query('SELECT * FROM products', function(err, res) {
+function gaming () {
+    connection.query('SELECT * FROM Products WHERE Department = "Gaming";', function(err, res){
         console.log(res);
-        inquirer.prompt({
-            name: "choice",
-            type: "rawlist",
-            choices: function(value) {
-                var choiceArray = [];
-                for (var i = 0; i < res.length; i++) {
-                    choiceArray.push(res[i].itemname);
-                }
-
-
-function start(){
-	inquirer.prompt({
-		name:"buyItem";
-		type:"rawlist";
-		message:"Would you like to [BUY] an item today?"
-	})
+        });
 }
+
+function communication () {
+    connection.query('SELECT * FROM Products WHERE Department = "Communications";', function(err, res){
+        console.log(res);
+        });
+}
+
+function computers () {
+    connection.query('SELECT * FROM Products WHERE Department = "Computers";', function(err, res){
+        console.log(res);
+        });
+}
+
